@@ -20,7 +20,14 @@ services:
  - docker
 
 script:
-  - docker run hobarrera/makepkg
+  - docker run -v $TRAVIS_BUILD_DIR:/pkg hobarrera/makepkg
+```
+
+Usage locally
+-------------
+
+```
+docker run -v $(pwd):/pkg hobarrera/makepkg
 ```
 
 Usage with GitLab CI

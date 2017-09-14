@@ -1,8 +1,5 @@
 FROM base/archlinux
 
-COPY . /pkg
-WORKDIR /pkg
-
 # makepkg cannot (and should not) be run as root:
 RUN useradd -m notroot
 
@@ -12,6 +9,7 @@ RUN echo "notroot ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/notroot
 RUN chmod 400 /etc/sudoers.d/notroot
 
 # Also, make sure we can do the actual building
+RUN mkdir /pkg
 RUN chown -R notroot /pkg
 
 # Generally, refreshing without sync'ing is discouraged, but we've a clean
@@ -24,4 +22,5 @@ RUN sudo -u notroot touch /home/notroot/.gnupg/gpg.conf
 RUN sudo -u notroot echo "keyserver-options auto-key-retrieve" > /home/notroot/.gnupg/gpg.conf
 
 # Build the package
+WORKDIR /pkg
 CMD sudo -u notroot makepkg -fs --noconfirm
