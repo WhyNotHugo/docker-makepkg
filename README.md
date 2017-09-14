@@ -6,8 +6,6 @@ a clean Arch installation.
 It is intended to be used by packagers, both via CI, and on non-ArchLinux
 environments.
 
-Retrieval of GPG keys is also handled transparently.
-
 Usage with travis
 -----------------
 
@@ -35,6 +33,13 @@ Usage with GitLab CI
 
 Since GitLab CI uses Docker, it should be trivial to use these images there
 too.
+
+Extra details
+-------------
+
+* `base-devel` is preinstalled.
+* All `depends` will be installed.
+* GPG keys used to verify signatures are auto-fetched.
 
 Licence
 -------
