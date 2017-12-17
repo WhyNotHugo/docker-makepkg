@@ -1,0 +1,2 @@
+script:
+  - curl --data build=true -X POST https://registry.hub.docker.com/u/whynothugo/makepkg/trigger/$HUB_TOKEN/
