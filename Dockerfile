@@ -8,6 +8,7 @@ RUN useradd -m notroot
 # Generally, refreshing without sync'ing is discouraged, but we've a clean
 # environment here.
 RUN pacman -Sy --noconfirm base-devel
+RUN pacman -Syu --noconfirm
 
 # Allow notroot to run stuff as root (to install dependencies):
 RUN echo "notroot ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/notroot
