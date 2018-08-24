@@ -2,12 +2,12 @@
 
 # Make a copy so we never alter the original
 cp -r /pkg /tmp/pkg
+cd /tmp/pkg
 
-# Make sure we can RW the copy
-chown -R notroot /tmp/pkg
-chmod -R u+rw /tmp/pkg
-find /tmp/pkg -type d -exec chmod u+x {} \;
+# Install (official repo + AUR) dependencies using yay. We avoid using makepkg
+# -s since it is unable to install AUR dependencies.
+yay -S --noconfirm \
+    $(pacman --deptest $(source ./PKGBUILD && echo ${depends[@]} ${makedepends[@]}))
 
 # Do the actual building
-cd /tmp/pkg
-sudo -u notroot makepkg -fs --noconfirm
+makepkg -f
