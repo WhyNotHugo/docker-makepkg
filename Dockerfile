@@ -7,16 +7,26 @@ RUN useradd -m notroot
 
 # Generally, refreshing without sync'ing is discouraged, but we've a clean
 # environment here.
-RUN pacman -Sy --noconfirm base-devel
-RUN pacman -Syu --noconfirm
+RUN pacman -Sy --noconfirm archlinux-keyring && \
+    pacman -Sy --noconfirm base-devel git && \
+    pacman -Syu --noconfirm
 
 # Allow notroot to run stuff as root (to install dependencies):
 RUN echo "notroot ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/notroot
 
-# Auto-fetch GPG keys (for checking signatures)
-RUN sudo -u notroot mkdir /home/notroot/.gnupg
-RUN sudo -u notroot touch /home/notroot/.gnupg/gpg.conf
-RUN sudo -u notroot echo "keyserver-options auto-key-retrieve" > /home/notroot/.gnupg/gpg.conf
+# Continue execution (and CMD) as notroot:
+USER notroot
+WORKDIR /home/notroot
+
+# Auto-fetch GPG keys (for checking signatures):
+RUN mkdir .gnupg && \
+    touch .gnupg/gpg.conf && \
+    echo "keyserver-options auto-key-retrieve" > .gnupg/gpg.conf
+
+# Install yay (for building AUR dependencies):
+RUN git clone https://aur.archlinux.org/yay-bin.git && \
+    cd yay-bin && \
+    makepkg --noconfirm --syncdeps --rmdeps --install --clean
 
 # Build the package
 WORKDIR /pkg
