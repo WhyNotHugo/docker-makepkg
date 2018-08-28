@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 # Make a copy so we never alter the original
 cp -r /pkg /tmp/pkg
 cd /tmp/pkg
