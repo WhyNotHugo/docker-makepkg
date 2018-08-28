@@ -13,3 +13,6 @@ yay -Sy --noconfirm \
 
 # Do the actual building
 makepkg -f
+
+# Store the built package(s)
+[ -z "$EXPORT_PKG" ] || mv ./*.pkg.tar.xz /pkg

@@ -24,7 +24,10 @@ Usage locally
 -------------
 
 ```
-docker run -v $(pwd):/pkg whynothugo/makepkg
+docker run -v $PWD:/pkg whynothugo/makepkg
+
+# Or export the built package file to the workding directory
+docker run -e EXPORT_PKG=1 -v $PWD:/pkg whynothugo/makepkg
 ```
 
 Usage with GitLab CI
