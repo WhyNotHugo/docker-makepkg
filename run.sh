@@ -14,5 +14,8 @@ yay -Sy --noconfirm \
 # Do the actual building
 makepkg -f
 
-# Store the built package(s)
-[ -z "$EXPORT_PKG" ] || mv ./*.pkg.tar.xz /pkg
+# Store the built package(s). Ensure permissions match the original PKGBUILD.
+if [ -n "$EXPORT_PKG" ]; then
+    sudo chown $(stat -c '%u:%g' /pkg/PKGBUILD) ./*.pkg.tar.xz
+    sudo mv ./*.pkg.tar.xz /pkg
+fi
