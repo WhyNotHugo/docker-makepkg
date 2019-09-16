@@ -13,6 +13,8 @@ jobs:
       - name: Touch a file
         run: date +%s > .rebuild
       - name: Commit touched file
-        run: git add .rebuild && git commit -m 'Trigger rebuild'
+        run: |
+          git add .rebuild &&
+          git -c user.name="🤖" -c user.email="robot@barrera.io" commit -m 'Trigger rebuild'
       - name: Push change
         run: git push origin HEAD
