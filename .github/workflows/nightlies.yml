@@ -27,4 +27,4 @@ jobs:
           git add .rebuild &&
           git commit -m 'Trigger rebuild'
       - name: Push change
-        run: git push origin master
+        run: git push origin HEAD:$GITHUB_REF
