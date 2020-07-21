@@ -16,6 +16,6 @@ makepkg -f
 
 # Store the built package(s). Ensure permissions match the original PKGBUILD.
 if [ -n "$EXPORT_PKG" ]; then
-    sudo chown $(stat -c '%u:%g' /pkg/PKGBUILD) ./*.pkg.tar.xz
-    sudo mv ./*.pkg.tar.xz /pkg
+    sudo chown $(stat -c '%u:%g' /pkg/PKGBUILD) ./*pkg.tar*
+    sudo mv ./*pkg.tar* /pkg
 fi
