@@ -8,7 +8,7 @@ cd /tmp/pkg
 
 # Install (official repo + AUR) dependencies using yay. We avoid using makepkg
 # -s since it is unable to install AUR dependencies.
-yay -Sy --noconfirm \
+yay -Syu --noconfirm \
     $(pacman --deptest $(source ./PKGBUILD && echo ${depends[@]} ${makedepends[@]}))
 
 # Do the actual building
