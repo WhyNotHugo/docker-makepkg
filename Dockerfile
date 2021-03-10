@@ -8,6 +8,7 @@ RUN useradd -m notroot
 # Generally, refreshing without sync'ing is discouraged, but we've a clean
 # environment here.
 RUN pacman -Sy --noconfirm archlinux-keyring && \
+    pacman -Sy --noconfirm glibc && \
     pacman -Sy --noconfirm base-devel git && \
     pacman -Syu --noconfirm
 
