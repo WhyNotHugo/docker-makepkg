@@ -1,4 +1,4 @@
-FROM archlinux/base
+FROM archlinux:base-devel
 
 COPY run.sh /run.sh
 
