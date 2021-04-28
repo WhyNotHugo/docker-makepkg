@@ -1,6 +1,8 @@
 docker-makepkg
 ==============
 
+[![builds.sr.ht status](https://builds.sr.ht/~whynothugo/docker-makepkg.svg)](https://builds.sr.ht/~whynothugo/docker-makepkg)
+
 This docker image is intended to tests `PKGBUILDs`, by installing dependencies
 and running `makepkg -f` in a clean Arch installation. It is intended to be
 used by packagers, both via CI, and on non-ArchLinux environments.
