@@ -23,6 +23,7 @@ RUN mkdir .gnupg && \
     echo "keyserver-options auto-key-retrieve" > .gnupg/gpg.conf
 
 # Install yay (for building AUR dependencies):
+# hadolint ignore=DL3003
 RUN git clone https://aur.archlinux.org/yay-bin.git && \
     cd yay-bin && \
     makepkg --noconfirm --syncdeps --rmdeps --install --clean
