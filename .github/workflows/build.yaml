@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - nightlies
   pull_request:
     types: [opened, synchronize, reopened]
   schedule:
@@ -26,7 +27,7 @@ jobs:
           ./Dockerfile
 
     - uses: redhat-actions/push-to-registry@v2
-      if: ${{ github.ref == 'refs/heads/main' }}
+      if: ${{ github.ref == 'refs/heads/nightlies' }}
       with:
         image: ${{ steps.build-image.outputs.image }}
         tags: ${{ steps.build-image.outputs.tags }}
