@@ -6,7 +6,7 @@ repos:
         args: [--markdown-linebreak-ext=md]
       - id: end-of-file-fixer
       - id: check-added-large-files
-  - repo: https://github.com/hadolint/hadolint
-    rev: v2.7.0
-    hooks:
-      - id: hadolint
+  # - repo: https://github.com/hadolint/hadolint
+  #   rev: v2.7.0 (tag is broken)
+  #   hooks:
+  #     - id: hadolint-docker
