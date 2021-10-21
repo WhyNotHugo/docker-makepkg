@@ -2,8 +2,6 @@ FROM archlinux:base-devel
 
 # makepkg cannot (and should not) be run as root:
 RUN useradd -m build && \
-    # Generally, refreshing without sync'ing is discouraged, but we've a clean
-    # environment here.
     pacman -Syu --noconfirm && \
     pacman -Sy --noconfirm git && \
     # Allow build to run stuff as root (to install dependencies):
