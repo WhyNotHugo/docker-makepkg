@@ -1,32 +1,29 @@
 FROM archlinux:base-devel
 
-COPY run.sh /run.sh
-
 # makepkg cannot (and should not) be run as root:
-RUN useradd -m notroot
+RUN useradd -m build && \
+    # Generally, refreshing without sync'ing is discouraged, but we've a clean
+    # environment here.
+    pacman -Syu --noconfirm && \
+    pacman -Sy --noconfirm git && \
+    # Allow build to run stuff as root (to install dependencies):
+    echo "build ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/build
 
-# Generally, refreshing without sync'ing is discouraged, but we've a clean
-# environment here.
-RUN pacman -Syu --noconfirm && \
-    pacman -Sy --noconfirm git
-
-# Allow notroot to run stuff as root (to install dependencies):
-RUN echo "notroot ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/notroot
-
-# Continue execution (and CMD) as notroot:
-USER notroot
-WORKDIR /home/notroot
+# Continue execution (and CMD) as build:
+USER build
+WORKDIR /home/build
 
 # Auto-fetch GPG keys (for checking signatures):
 RUN mkdir .gnupg && \
     touch .gnupg/gpg.conf && \
-    echo "keyserver-options auto-key-retrieve" > .gnupg/gpg.conf
-
-# Install yay (for building AUR dependencies):
-# hadolint ignore=DL3003
-RUN git clone https://aur.archlinux.org/yay-bin.git && \
+    echo "keyserver-options auto-key-retrieve" > .gnupg/gpg.conf && \
+    # Install yay (for building AUR dependencies):
+    # hadolint ignore=DL3003
+    git clone https://aur.archlinux.org/yay-bin.git && \
     cd yay-bin && \
     makepkg --noconfirm --syncdeps --rmdeps --install --clean
+
+COPY run.sh /run.sh
 
 # Build the package
 WORKDIR /pkg

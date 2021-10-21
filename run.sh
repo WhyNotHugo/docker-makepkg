@@ -6,8 +6,8 @@ set -e
 cp -r /pkg /tmp/pkg
 cd /tmp/pkg
 
-# Install (official repo + AUR) dependencies using yay. We avoid using makepkg
-# -s since it is unable to install AUR dependencies.
+# Install (official repo + AUR) dependencies using yay. We avoid using
+# `makepkg -s` since it is unable to install AUR dependencies.
 depends=(); makedepends=(); checkdepends=()
 # shellcheck disable=1091
 . ./PKGBUILD
@@ -21,4 +21,10 @@ makepkg -f
 if [ -n "$EXPORT_PKG" ]; then
     sudo chown "$(stat -c '%u:%g' /pkg/PKGBUILD)" ./*pkg.tar*
     sudo mv ./*pkg.tar* /pkg
+fi
+# Export .SRCINFO for built package
+if [ -n "$EXPORT_SRC" ]; then
+    makepkg --printsrcinfo > .SRCINFO
+    sudo chown "$(stat -c '%u:%g' /pkg/PKGBUILD)" ./.SRCINFO
+    sudo mv ./.SRCINFO /pkg
 fi
