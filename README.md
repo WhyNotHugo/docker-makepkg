@@ -7,6 +7,9 @@ This docker image is intended to tests `PKGBUILDs`, by installing dependencies
 and running `makepkg -f` in a clean Arch installation. It is intended to be
 used by packagers, both via CI, and on non-ArchLinux environments.
 
+The package can be saved to the current director by adding `-e EXPORT_PKG=1`,
+and the updated .SRCINFO file for the built package with `-e EXPORT_SRC=1`.
+
 Usage with travis
 -----------------
 
@@ -27,10 +30,22 @@ Usage locally
 
 ```
 docker run -v $PWD:/pkg whynothugo/makepkg
+```
 
-# Or export the built package file to the workding directory
+Or export the built package file to the workding directory
+
+```
 docker run -e EXPORT_PKG=1 -v $PWD:/pkg whynothugo/makepkg
 ```
+
+Or export the updated .SRCINFO for the package
+
+```
+docker run -e EXPORT_SRC=1 -v $PWD:/pkg whynothugo/makepkg
+```
+
+If you are running Arch, add `-v /etc/pacman.d/mirrorlist:/etc/pacman.d/mirrorlist:ro`
+to use your own mirrors.
 
 Usage with GitLab CI
 --------------------
