@@ -6,13 +6,13 @@ set -e
 cp -r /pkg /tmp/pkg
 cd /tmp/pkg
 
-# Install (official repo + AUR) dependencies using yay. We avoid using
+# Install (official repo + AUR) dependencies using paru. We avoid using
 # `makepkg -s` since it is unable to install AUR dependencies.
 depends=(); makedepends=(); checkdepends=()
 # shellcheck disable=1091
 . ./PKGBUILD
 deps=( "${depends[@]}" "${makedepends[@]}" "${checkdepends[@]}" )
-pacman --deptest "${deps[@]}" | xargs yay -Sy --noconfirm
+pacman --deptest "${deps[@]}" | xargs paru -Sy --noconfirm
 
 # Do the actual building
 makepkg -f

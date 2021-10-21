@@ -15,10 +15,10 @@ WORKDIR /home/build
 RUN mkdir .gnupg && \
     touch .gnupg/gpg.conf && \
     echo "keyserver-options auto-key-retrieve" > .gnupg/gpg.conf && \
-    # Install yay (for building AUR dependencies):
+    # Install paru (for building AUR dependencies):
     # hadolint ignore=DL3003
-    git clone https://aur.archlinux.org/yay-bin.git && \
-    cd yay-bin && \
+    git clone https://aur.archlinux.org/paru-bin.git && \
+    cd paru-bin && \
     makepkg --noconfirm --syncdeps --rmdeps --install --clean
 
 COPY run.sh /run.sh
