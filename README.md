@@ -57,7 +57,7 @@ Extra details
 -------------
 
 * `base-devel` is preinstalled.
-* All `depends` will be installed (including AUR packages using [yay](https://github.com/Jguer/yay)).
+* All `depends` will be installed (including AUR packages using [paru](https://github.com/Jguer/paru)).
 * GPG keys used to verify signatures are auto-fetched.
 
 Licence
