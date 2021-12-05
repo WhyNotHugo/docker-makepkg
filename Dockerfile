@@ -15,8 +15,6 @@ WORKDIR /home/build
 RUN mkdir .gnupg && \
     touch .gnupg/gpg.conf && \
     echo "keyserver-options auto-key-retrieve" > .gnupg/gpg.conf && \
-    # Install paru (for building AUR dependencies):
-    # hadolint ignore=DL3003
     git clone https://aur.archlinux.org/paru-bin.git && \
     cd paru-bin && \
     makepkg --noconfirm --syncdeps --rmdeps --install --clean
