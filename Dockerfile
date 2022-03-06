@@ -12,6 +12,7 @@ USER build
 WORKDIR /home/build
 
 # Auto-fetch GPG keys (for checking signatures):
+# hadolint ignore=DL3003
 RUN mkdir .gnupg && \
     touch .gnupg/gpg.conf && \
     echo "keyserver-options auto-key-retrieve" > .gnupg/gpg.conf && \
@@ -23,4 +24,5 @@ COPY run.sh /run.sh
 
 # Build the package
 WORKDIR /pkg
-CMD ["/bin/bash", "/run.sh"]
+CMD ["/run.sh"]
+ENTRYPOINT ["/bin/bash", "--login", "-c"]
