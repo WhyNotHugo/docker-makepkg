@@ -58,6 +58,8 @@ Extra details
 
 * `base-devel` is preinstalled.
 * All `depends` will be installed (including AUR packages using [paru](https://github.com/Jguer/paru)).
+* You may pass `SYNC_DATABASE=1` to force a `pacman -Sy` to refresh the
+  database, since it updates quite frequently.
 * GPG keys used to verify signatures are auto-fetched.
 
 Licence

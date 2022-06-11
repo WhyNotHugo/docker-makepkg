@@ -6,6 +6,11 @@ set -e
 cp -r /pkg /tmp/pkg
 cd /tmp/pkg
 
+# Sync database
+if [ -n "$SYNC_DATABASE" ]; then
+    paru -S --refresh
+fi
+
 # Do the actual building. Paru will fetch all dependencies for us (including
 # AUR dependencies) and then build the package.
 paru -U --noconfirm
