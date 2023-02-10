@@ -10,21 +10,6 @@ used by packagers, both via CI, and on non-ArchLinux environments.
 The package can be saved to the current director by adding `-e EXPORT_PKG=1`,
 and the updated .SRCINFO file for the built package with `-e EXPORT_SRC=1`.
 
-Usage with travis
------------------
-
-Generally, this should be enough:
-
-```yaml
-sudo: required
-
-services:
- - docker
-
-script:
-  - docker run -v $TRAVIS_BUILD_DIR:/pkg whynothugo/makepkg
-```
-
 Usage locally
 -------------
 
@@ -46,6 +31,21 @@ docker run -e EXPORT_SRC=1 -v $PWD:/pkg whynothugo/makepkg
 
 If you are running Arch, you can share the mirror list from your host by adding
 `-v /etc/pacman.d/mirrorlist:/etc/pacman.d/mirrorlist:ro`.
+
+Usage with travis
+-----------------
+
+Generally, this should be enough:
+
+```yaml
+sudo: required
+
+services:
+ - docker
+
+script:
+  - docker run -v $TRAVIS_BUILD_DIR:/pkg whynothugo/makepkg
+```
 
 Usage with GitLab CI
 --------------------
