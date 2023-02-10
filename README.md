@@ -38,14 +38,14 @@ Or export the built package file to the working directory
 docker run -e EXPORT_PKG=1 -v $PWD:/pkg whynothugo/makepkg
 ```
 
-Or export the updated .SRCINFO for the package
+Or export the updated `.SRCINFO` for the package
 
 ```
 docker run -e EXPORT_SRC=1 -v $PWD:/pkg whynothugo/makepkg
 ```
 
-If you are running Arch, add `-v /etc/pacman.d/mirrorlist:/etc/pacman.d/mirrorlist:ro`
-to use your own mirrors.
+If you are running Arch, you can share the mirror list from your host by adding
+`-v /etc/pacman.d/mirrorlist:/etc/pacman.d/mirrorlist:ro`.
 
 Usage with GitLab CI
 --------------------
@@ -56,8 +56,9 @@ too.
 Extra details
 -------------
 
-* `base-devel` is preinstalled.
-* All `depends` will be installed (including AUR packages using [paru](https://github.com/Morganamilo/paru)).
+* `base-devel` is pre-installed.
+* All `depends` will be installed (including AUR packages using
+  [paru](https://github.com/Morganamilo/paru)).
 * You may pass `SYNC_DATABASE=1` to force a `pacman -Sy` to refresh the
   database, since it updates quite frequently.
 * GPG keys used to verify signatures are auto-fetched.
