@@ -8,7 +8,7 @@ and running `makepkg -f` in a clean Arch installation. It is intended to be
 used by packagers, both via CI, and on non-ArchLinux environments.
 
 The package can be saved to the current director by adding `-e EXPORT_PKG=1`,
-and the updated .SRCINFO file for the built package with `-e EXPORT_SRC=1`.
+and the updated `.SRCINFO` file for the built package with `-e EXPORT_SRC=1`.
 
 Usage locally
 -------------
