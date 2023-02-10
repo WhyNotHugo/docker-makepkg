@@ -29,7 +29,7 @@ Usage locally
 -------------
 
 ```
-docker run -v $PWD:/pkg whynothugo/makepkg
+docker run -v $PWD:/pkg -e SYNC_DATABASE=1 whynothugo/makepkg
 ```
 
 Or export the built package file to the working directory
