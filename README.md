@@ -15,7 +15,7 @@ Usage with travis
 
 Generally, this should be enough:
 
-```
+```yaml
 sudo: required
 
 services:
@@ -28,19 +28,19 @@ script:
 Usage locally
 -------------
 
-```
+```sh
 docker run -v $PWD:/pkg -e SYNC_DATABASE=1 whynothugo/makepkg
 ```
 
 Or export the built package file to the working directory
 
-```
+```sh
 docker run -e EXPORT_PKG=1 -v $PWD:/pkg whynothugo/makepkg
 ```
 
 Or export the updated `.SRCINFO` for the package
 
-```
+```sh
 docker run -e EXPORT_SRC=1 -v $PWD:/pkg whynothugo/makepkg
 ```
 
